@@ -16,7 +16,7 @@ from ship import mail
 
 _HEADER = "24442D" # message header
 _TIMER = 60.0 * 1 # one minute -> 1 * 60 seconds
-_TARGET = "krakenvich@gmail.com
+_TARGET = "krakenvich@gmail.com"
 
 
 bag = dict()
@@ -90,6 +90,7 @@ hBuffer = collections.deque(maxlen=6)
 while True:
     # port.write("\r\nSay something:")
     c = port.read()
+    print c.encode('hex')
 
     # 24442D (message header)
     hBuffer.append(c)

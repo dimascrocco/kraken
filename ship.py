@@ -11,7 +11,8 @@ host = "smtp.gmail.com"
 port = 587
 
 gmail_user = "krakenvich@gmail.com"
-gmail_pwd = ""
+#gmail_pwd = "releasethekraken#"
+gmail_pwd = "rhkrwbvlhstftdgs"
 
 def mail(to, subject, text, attach):
    msg = MIMEMultipart()

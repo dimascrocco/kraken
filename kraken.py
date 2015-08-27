@@ -14,7 +14,7 @@ import time, threading
 from ship import mail
 
 
-_HEADER = "24442D" # message header
+_HEADER = "24442d" # message header
 _TIMER = 60.0 * 1 # one minute -> 1 * 60 seconds
 _TARGET = "krakenvich@gmail.com"
 
@@ -83,23 +83,28 @@ timer = threading.Timer(_TIMER, store)
 timer.daemon = True
 timer.start()
 
-port = serial.Serial("/dev/ttyACM0", baudrate=9600, timeout=3.0)
+port = serial.Serial("/dev/ttyUSB0", baudrate=19200, timeout=3.0)
 
 hBuffer = collections.deque(maxlen=6)
 
 while True:
     # port.write("\r\nSay something:")
     c = port.read()
-    print c.encode('hex')
+    #print c.encode('hex')
 
     # 24442D (message header)
-    hBuffer.append(c)
+    hBuffer.append(c.encode('hex'))
     header = ''.join(hBuffer)
+    print header
 
     if header == _HEADER:
 	print "# header found..."
         hBuffer.clear()
-        data = port.read(68)
-        processData(data)
+        data = port.read(34)
+        hexData = ""
+        for c in data:
+            hexData += c.encode('hex')
+        
+        processData(hexData)
 
 
